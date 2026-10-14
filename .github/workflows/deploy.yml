@@ -1,0 +1,82 @@
+name: Deploy LFSD Assignments
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Assignment 4 dependencies
+        working-directory: Assignment-4-React-Profile-Card
+        run: npm install
+
+      - name: Build Assignment 4
+        working-directory: Assignment-4-React-Profile-Card
+        run: npm run build
+
+      - name: Install Assignment 5 dependencies
+        working-directory: Assignment-5-React-Controlled-Form
+        run: npm install
+
+      - name: Build Assignment 5
+        working-directory: Assignment-5-React-Controlled-Form
+        run: npm run build
+
+      - name: Install Assignment 6 dependencies
+        working-directory: Assignment-6-React-Counter-useState
+        run: npm install
+
+      - name: Build Assignment 6
+        working-directory: Assignment-6-React-Counter-useState
+        run: npm run build
+
+      - name: Prepare Pages folder
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+
+          cp -r Assignment-1-JavaScript-Calculator _site/
+          cp -r Assignment-2-DOM-ToDo-List _site/
+          cp -r Assignment-3-JavaScript-Form-Validation _site/
+
+          cp -r Assignment-4-React-Profile-Card/dist _site/Assignment-4-React-Profile-Card
+          cp -r Assignment-5-React-Controlled-Form/dist _site/Assignment-5-React-Controlled-Form
+          cp -r Assignment-6-React-Counter-useState/dist _site/Assignment-6-React-Counter-useState
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
