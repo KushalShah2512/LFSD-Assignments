@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Arial, sans-serif;
+
+    background: linear-gradient(135deg, #dbeafe, #eef2ff);
+}
+
+.todo-container {
+    width: 625px;
+    padding: 35px;
+
+    background-color: white;
+    border-radius: 18px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #1e293b;
+}
+
+.input-section {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+#taskInput {
+    flex: 1;
+
+    padding: 14px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+
+    font-size: 16px;
+}
+
+#taskInput:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+.input-section button {
+    padding: 14px 20px;
+
+    border: none;
+    border-radius: 9px;
+
+    background-color: #2563eb;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.input-section button:hover {
+    background-color: #1d4ed8;
+}
+
+#taskList {
+    list-style: none;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 14px 15px;
+
+    margin-bottom: 12px;
+
+    background-color: #f1f5f9;
+
+    border-radius: 9px;
+
+    border-left: 4px solid #2563eb;
+}
+
+/* Checkbox */
+.task-checkbox {
+    width: 19px;
+    height: 19px;
+
+    cursor: pointer;
+}
+
+/* Task text */
+.task-text {
+    flex: 1;
+
+    font-size: 16px;
+    color: #111827;
+
+    transition: 0.2s;
+}
+
+/* Completed task */
+.task.completed .task-text {
+    text-decoration: line-through;
+    color: #64748b;
+}
+
+/* Delete button */
+.delete-btn {
+    padding: 8px 13px;
+
+    border: none;
+    border-radius: 6px;
+
+    background-color: #dc2626;
+    color: white;
+
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #b91c1c;
+}
+
+#emptyMessage {
+    text-align: center;
+    color: #64748b;
+    font-size: 14px;
+}
